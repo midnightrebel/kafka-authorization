@@ -38,17 +38,3 @@ class CurrentUserView(APIView):
 class ProducerView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = [OAuth2Authentication, JWTAuthentication ]
-
-    def get(self, request):
-        email = request.user.email
-        user = User.objects.filter(email=email).first()
-        payload = {
-            'email': user.email,
-            'username': user.username
-        }
-        producer = KafkaProducer(bootstrap_servers='localhost:9092', api_version=(3, 20),
-                                 )
-
-        serialized_data = json.dumps(payload).encode('utf-8')
-        producer.send('Ptopic',  serialized_data)
-        return Response(serialized_data,status.HTTP_200_OK)
