@@ -12,17 +12,18 @@ from .models import User
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def send_message(instance, **kwargs):
-    email = instance.email
-    user = User.objects.filter(email=email).first()
-    payload = {
-        'email': instance.email,
-        'username': instance.username
-    }
-    producer = KafkaProducer(bootstrap_servers='localhost:9092', api_version=(3, 20),
-                             )
-
-    serialized_data = json.dumps(payload).encode('utf-8')
-    producer.send('Ptopic', serialized_data)
-    return Response(serialized_data, status.HTTP_200_OK)
+    while True:
+        email = instance.email
+        user = User.objects.filter(email=email).first()
+        payload = {
+            'email': instance.email,
+            'username': instance.username
+        }
+        print("Init.")
+        producer = KafkaProducer(bootstrap_servers='localhost:9092',api_version=(3,20))
+        serialized_data = json.dumps(payload).encode('utf-8')
+        producer.send('Ptopic', serialized_data)
+        producer.flush()
+        return Response(status.HTTP_200_OK)
 
 

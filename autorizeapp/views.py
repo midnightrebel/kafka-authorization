@@ -34,7 +34,3 @@ class CurrentUserView(APIView):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
-
-class ProducerView(APIView):
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = [OAuth2Authentication, JWTAuthentication ]
