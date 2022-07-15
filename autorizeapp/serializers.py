@@ -1,5 +1,7 @@
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .models import User
+from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         min_length=8,
         write_only=True
     )
+
 
     class Meta:
         model = User

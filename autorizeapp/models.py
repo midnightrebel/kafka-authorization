@@ -1,5 +1,3 @@
-import datetime
-
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
@@ -36,6 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(db_index=True, unique=True)
     is_staff = models.BooleanField(default=False)
     password = models.CharField(max_length=255)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     USERNAME_FIELD = 'email'
@@ -49,4 +48,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         ordering = ['username']
-

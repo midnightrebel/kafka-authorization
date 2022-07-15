@@ -19,17 +19,12 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
-)
-
+)   
 
 SECRET_KEY = env('SECRET_KEY')
 
-
 DEBUG = env('DEBUG')
-ALLOWED_HOSTS =os.environ.get('ALLOWED_HOSTS').split(',')
-
-
-
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -61,7 +56,7 @@ ROOT_URLCONF = 'autorize.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,16 +74,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'autorize.wsgi.application'
 
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-      'Basic': {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
             'type': 'basic'
-      },
-      'Bearer': {
+        },
+        'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
-      }
-   }
+        }
+    }
 }
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -103,7 +98,6 @@ DATABASES = {
         "PORT": os.environ.get("SQL_PORT"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -122,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

@@ -2,7 +2,7 @@ import json
 
 from kafka import KafkaProducer
 from oauth2_provider.contrib.rest_framework import OAuth2Authentication
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
